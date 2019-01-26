@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+/* Qualquer tipo de input, drop down list ou caixas de texto grandes receberão este estilo */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Determina a altura mínima do body */
+.main-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+    min-height: 300px !important;
+}

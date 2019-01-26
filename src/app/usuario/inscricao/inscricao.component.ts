@@ -1,12 +1,12 @@
-// ssbcvp - parei em 03:00:00
-
+// ssbcvp - video 2 00:26:00
 import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControlName, FormControl } from '@angular/forms';
 
 import { Observable, fromEvent, merge } from 'rxjs';
 
 import { Organizador } from '../models/organizador';
 import { GenericValidator } from 'src/app/utils/genericValidator';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-inscricao',
@@ -40,8 +40,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
       },
       cpf: {
         required: 'Informe o CPF',
-        minlength: 'O CPF precisa ter 11 caracteres',
-        maxlength: 'O CPF precisa ter no máximo 11 caracteres'
+        rangeLength: 'O CPF precisa ter 11 caracteres'
       },
       email: {
         required: 'Informe o e-mail',
@@ -49,11 +48,13 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
       },
       senha: {
         required: 'Informe a senha',
-        minlength: 'A senha precisa ter pelo menos 6 caracteres'
+        minlength: 'A senha precisa ter pelo menos 6 caracteres',
+        equalTo: 'As senhas não conferem'
       },
       senhaConfirmacao: {
         required: 'Informe a senha de confirmação',
-        minlength: 'A senha de confirmação precisa ter pelo menos 6 caracteres'
+        minlength: 'A senha de confirmação precisa ter pelo menos 6 caracteres',
+        equalTo: 'As senhas não conferem'
       }
     }
 
@@ -61,13 +62,18 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+    // estamos confirmando se ambas as senhas são iguais
+    let senha = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    let senhaConfirmacao = new FormControl('', [Validators.required, Validators.minLength(6), CustomValidators.equalTo(senha)]);
+
     // estou criando um grupo de formulários que retorna um form group
     this.inscricaoForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(2)]],
-      cpf: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
-      senhaConfirmacao: ['', [Validators.required, Validators.minLength(6)]]
+      cpf: ['', [Validators.required, CustomValidators.rangeLength([11,11])]],
+      email: ['', [Validators.required, CustomValidators.email]],
+      senha: senha,
+      senhaConfirmacao: senhaConfirmacao
     });
 
   }

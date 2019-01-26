@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 
+import { CustomFormsModule } from 'ng2-validation';
+
 // bootstrap
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -42,6 +44,7 @@ import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CustomFormsModule,
     CollapseModule.forRoot(), // Para aplicar no módulo raiz
     CarouselModule.forRoot(),
     RouterModule.forRoot(rootRouterConfig, { useHash: false})
