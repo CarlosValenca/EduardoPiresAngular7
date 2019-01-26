@@ -1,5 +1,3 @@
-// ssbcvp -- parei no tempo: 01:48:22
-
 import { Injectable, Inject } from "@angular/core";
 import { Title, DOCUMENT } from "@angular/platform-browser";
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';

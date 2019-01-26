@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
@@ -23,6 +23,7 @@ import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.com
 
 // services
 import { SeoService } from './services/seo.service';
+import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +33,14 @@ import { SeoService } from './services/seo.service';
     MenuSuperiorComponent,
     HomeComponent,
     MenuLoginComponent,
-    ListaEventosComponent
+    ListaEventosComponent,
+    InscricaoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     CollapseModule.forRoot(), // Para aplicar no módulo raiz
     CarouselModule.forRoot(),
