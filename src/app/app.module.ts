@@ -4,8 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CustomFormsModule } from 'ng2-validation';
+import { ToastrModule } from 'ngx-toastr';
 
 // bootstrap
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -26,6 +28,10 @@ import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.com
 // services
 import { SeoService } from './services/seo.service';
 import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
+import { OrganizadorService } from './services/organizador.service';
+import { LoginComponent } from './usuario/login/login.component';
+import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-evento.component';
+import { EventoAuthService } from './eventos/services/auth.evento.service';
 
 @NgModule({
   declarations: [
@@ -36,23 +42,29 @@ import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
     HomeComponent,
     MenuLoginComponent,
     ListaEventosComponent,
-    InscricaoComponent
+    InscricaoComponent,
+    LoginComponent,
+    AdicionarEventoComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     CustomFormsModule,
-    CollapseModule.forRoot(), // Para aplicar no módulo raiz
+    ToastrModule.forRoot(),
+    CollapseModule.forRoot(), // Para aplicar no módulo principal
     CarouselModule.forRoot(),
     RouterModule.forRoot(rootRouterConfig, { useHash: false})
   ],
   // providers são serviços
   providers: [
     Title,
-    SeoService
+    SeoService,
+    OrganizadorService,
+    EventoAuthService
   ],
   bootstrap: [AppComponent]
 })

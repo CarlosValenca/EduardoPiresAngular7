@@ -14,10 +14,10 @@ import { GenericValidator } from 'src/app/utils/genericValidator';
 import { OrganizadorService } from 'src/app/services/organizador.service';
 
 @Component({
-  selector: 'app-inscricao',
-  templateUrl: './inscricao.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html'
 })
-export class InscricaoComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   // Pega elementos do HTML para trabalhar com estes elementos
   // Vamos obter o evento blur deles
@@ -27,7 +27,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
   // vai gerenciar os itens do formulário
   public errors: any[] = [];
   botaoVisivel: boolean = true;
-  inscricaoForm: FormGroup;
+  loginForm: FormGroup;
   organizador: Organizador;
   validationMessages: { [key: string]: { [key: string]: string } };
   displayMessage: { [key: string]: string } = {};
@@ -43,28 +43,13 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
     // o nome das propriedades dentro do objeto nome precisam ser iguais ao nome das propriedades que validam o campo
     // do contrário não traz a mensagem na tela
     this.validationMessages = {
-      nome: {
-        required: 'O nome é requerido',
-        minlength: 'O nome precisa ter no mínimo 2 caracteres',
-        maxlength: 'O nome precisa ter no máximo 150 caracteres'
-      },
-      cpf: {
-        required: 'Informe o CPF',
-        rangeLength: 'O CPF precisa ter 11 caracteres'
-      },
       email: {
         required: 'Informe o e-mail',
         email: 'Email inválido'
       },
       senha: {
         required: 'Informe a senha',
-        minlength: 'A senha precisa ter pelo menos 6 caracteres',
-        equalTo: 'As senhas não conferem'
-      },
-      senhaConfirmacao: {
-        required: 'Informe a senha de confirmação',
-        minlength: 'A senha de confirmação precisa ter pelo menos 6 caracteres',
-        equalTo: 'As senhas não conferem'
+        minlength: 'A senha precisa ter pelo menos 6 caracteres'
       }
     }
 
@@ -73,17 +58,10 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    // estamos confirmando se ambas as senhas são iguais
-    let senha = new FormControl('', [Validators.required, Validators.minLength(6)]);
-    let senhaConfirmacao = new FormControl('', [Validators.required, Validators.minLength(6), CustomValidators.equalTo(senha)]);
-
     // estou criando um grupo de formulários que retorna um form group
-    this.inscricaoForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(2)]],
-      cpf: ['', [Validators.required, CustomValidators.rangeLength([11,11])]],
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required, CustomValidators.email]],
-      senha: senha,
-      senhaConfirmacao: senhaConfirmacao
+      senha: ['', [Validators.required, Validators.minLength(6)]]
     });
 
   }
@@ -93,22 +71,22 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
       .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
 
     merge(...controlBlurs).subscribe(() => {
-      this.displayMessage = this.gerericValidator.processMessages(this.inscricaoForm);
+      this.displayMessage = this.gerericValidator.processMessages(this.loginForm);
     });
   }
 
-  adicionarOrganizador(){
+  login(){
     // processar as mensagens dentro do validator e mostrar na tela pelo display message
-    // this.displayMessage = this.gerericValidator.processMessages(this.inscricaoForm);
+    // this.displayMessage = this.gerericValidator.processMessages(this.loginForm);
         
     // dirty = troquei o valor inicial do formulário
-    if(this.inscricaoForm.valid && this.inscricaoForm.dirty){
+    if(this.loginForm.valid && this.loginForm.dirty){
       // pega os valores do formulário e mapeia na variável org
-      let org  = Object.assign({}, this.organizador, this.inscricaoForm.value);
+      let org  = Object.assign({}, this.organizador, this.loginForm.value);
 
       // E necessário fazer a subscrição através do subscribe para avisar o Front End quando o Back End
       // terminou de processar o retorno do novo organizador
-      this.organizadorService.registrarOrganizador(org)
+      this.organizadorService.login(org)
         .subscribe(
           result => {this.onSaveComplete(result)},
           fail => {this.onError(fail)}
@@ -119,7 +97,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
   onSaveComplete(response: any) : void {
     // Já reseta o formulário de inscrição de um novo organizador para evitar o usuário criar várias
     // vezes o mesmo organizador
-    this.inscricaoForm.reset();
+    this.loginForm.reset();
     // Limpa a lista de possíveis erros anteriores
     this.errors = [];
 
@@ -128,7 +106,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
 
     this.organizadorService.setLocalStorage(response.access_token, JSON.stringify(response.user));
 
-    let toastrMessage = this.toastr.success("Usuario Registrado com Sucesso!","Bem Vindo!");
+    let toastrMessage = this.toastr.success("Login Realizado com Sucesso!","Bem Vindo!");
 
     // Aqui fizemos uma brincadeira para mostrar como funciona os eventos do toastr
     if(toastrMessage) {
@@ -137,7 +115,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/home']);
       });
       toastrMessage.onShown.subscribe(() => {
-        this.inscricaoForm.controls
+        this.loginForm.controls
         this.botaoVisivel = false;
       });
     }

@@ -3,8 +3,7 @@ import { SeoService, SeoModel } from 'src/app/services/seo.service';
 
 @Component({
   selector: 'app-lista-eventos',
-  templateUrl: './lista-eventos.component.html',
-  styleUrls: ['./lista-eventos.component.css']
+  templateUrl: './lista-eventos.component.html'
 })
 export class ListaEventosComponent implements OnInit {
 
