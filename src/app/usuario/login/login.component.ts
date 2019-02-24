@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.organizadorService.setLocalStorage(response.access_token, JSON.stringify(response.user));
 
-    let toastrMessage = this.toastr.success("Login Realizado com Sucesso!","Bem Vindo!");
+    let toastrMessage = this.toastr.success("Login Realizado com Sucesso!","Bem Vindo !");
 
     // Aqui fizemos uma brincadeira para mostrar como funciona os eventos do toastr
     if(toastrMessage) {

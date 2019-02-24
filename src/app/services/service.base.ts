@@ -15,6 +15,17 @@ export abstract class ServiceBase
         };
     }
 
+    // Estou informando meu Back End que estou conversando em Json e passando o Token, pode ser usado para
+    // incluir pontualmente o Token junto da requisição http ao back end
+    protected ObterHeaderJsonToken() {
+        return {
+            headers: new HttpHeaders ({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer' + this.getUserToken()
+            })
+        };
+    }
+
     protected extractedData(response: any) {        
         // Retorne o nó data do serviço criado e registrado no Swagger, se vc executar
         // os métodos verá que sempre tem um nó data existente com os seus dados

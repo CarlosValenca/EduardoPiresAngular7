@@ -1,10 +1,15 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Configurações de Cultura Local
+import {registerLocaleData} from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 import { CustomFormsModule } from 'ng2-validation';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,14 +29,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MenuLoginComponent } from './shared/menu-login/menu-login.component';
 import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.component';
+import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-evento.component';
+import { AcessoNegadoComponent } from './shared/acesso-negado/acesso-negado.component';
+import { NaoEncontradoComponent } from './shared/nao-encontrado/nao-encontrado.component';
+import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
+import { LoginComponent } from './usuario/login/login.component';
+import { MeusEventosComponent } from './eventos/meus-eventos/meus-eventos.component';
 
 // services
 import { SeoService } from './services/seo.service';
-import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
 import { OrganizadorService } from './services/organizador.service';
-import { LoginComponent } from './usuario/login/login.component';
-import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-evento.component';
 import { EventoAuthService } from './eventos/services/auth.evento.service';
+import { EventoService } from './eventos/services/evento.service';
+import { ErrorHandlerService } from './services/error.handler.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +54,10 @@ import { EventoAuthService } from './eventos/services/auth.evento.service';
     ListaEventosComponent,
     InscricaoComponent,
     LoginComponent,
-    AdicionarEventoComponent
+    AdicionarEventoComponent,
+    AcessoNegadoComponent,
+    NaoEncontradoComponent,
+    MeusEventosComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +77,15 @@ import { EventoAuthService } from './eventos/services/auth.evento.service';
     Title,
     SeoService,
     OrganizadorService,
-    EventoAuthService
+    EventoAuthService,
+    EventoService,
+    // Para o intercept funcionar é necessário declarar ele de forma diferente dos outros
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerService,
+      // O multi determina se o intercept atuará em um ou mais módulos
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

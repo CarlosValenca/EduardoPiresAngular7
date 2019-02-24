@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { OrganizadorService } from 'src/app/services/organizador.service';
 
 @Component({
   selector: 'app-menu-superior',
@@ -6,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-superior.component.css']
 })
 
-export class MenuSuperiorComponent implements OnInit {
+export class MenuSuperiorComponent {
 
-  constructor() { }
+  isCollapsed: boolean = false;
 
-  public isCollapsed: boolean = true;
+  constructor(private organizadorService: OrganizadorService) { }
+
+  usuarioLogado() {
+
+    return this.organizadorService.isAuthenticated();
+
+  }
 
   ngOnInit() {
   }

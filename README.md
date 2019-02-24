@@ -19,3 +19,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 incluir no app.modules.ts
 Incluir tb o import: import { ToastrModule } from 'ngx-toastr'; em app.modules.ts
 No inscricao.component.ts importar o toastr
+
+# Degugar o código
+Tenha a extensão Debugger for Chrome
+
+#Rodar em produção
+ng s --prod
+
+#Pipes Customizados
+https://toddmotto.com/angular-pipes-custom-pipes
