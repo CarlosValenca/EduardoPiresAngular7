@@ -28,3 +28,8 @@ ng s --prod
 
 #Pipes Customizados
 https://toddmotto.com/angular-pipes-custom-pipes
+
+#Date Picker
+npm install mydatepicker --save
+https://www.npmjs.com/package/mydatepicker
+https://github.com/kekeh/mydatepicker#readme

@@ -51,12 +51,10 @@
         </div>
       </div>
 
-      <!-- ssbcvp - não consegui formatar o input data como dd/mm/yyyy -->
       <div class="form-group" [ngClass]="{'has-error': displayMessage.dataInicio }">
         <label class="col-md-2 control-label">Data de Início</label>
         <div class="col-md-10">
-          <!--<my-date-picker id="dataInicio" name="dataInicio" [options]="myDatePickerOptions" formControlName="dataInicio"></my-date-picker>-->
-          <input type="text" id="dataInicio" name="dataInicio" formControlName="dataInicio" />
+          <my-date-picker id="dataInicio" name="dataInicio" [options]="myDatePickerOptions" formControlName="dataInicio"></my-date-picker>
           <span class="text-danger" *ngIf="displayMessage.dataInicio">
               <p [innerHTML]="displayMessage.dataInicio"></p>
         </span>
@@ -66,8 +64,7 @@
       <div class="form-group" [ngClass]="{'has-error': displayMessage.dataFim }">
         <label class="col-md-2 control-label">Data de Encerramento</label>
         <div class="col-md-10">
-            <!--<my-date-picker id="dataFim" name="dataFim" [options]="myDatePickerOptions" formControlName="dataFim"></my-date-picker>-->
-            <input type="text" id="dataFim" name="dataFim" formControlName="dataFim" />
+            <my-date-picker id="dataFim" name="dataFim" [options]="myDatePickerOptions" formControlName="dataFim"></my-date-picker>
             <span class="text-danger" *ngIf="displayMessage.dataFim">
               <p [innerHTML]="displayMessage.dataFim"></p>
         </span>

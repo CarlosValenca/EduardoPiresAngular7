@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt);
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { CustomFormsModule } from 'ng2-validation';
 import { ToastrModule } from 'ngx-toastr';
@@ -42,6 +43,9 @@ import { OrganizadorService } from './services/organizador.service';
 import { EventoAuthService } from './eventos/services/auth.evento.service';
 import { EventoService } from './eventos/services/evento.service';
 import { ErrorHandlerService } from './services/error.handler.service';
+import { EditarEventoComponent } from './eventos/editar-evento/editar-evento.component';
+import { DetalhesEventoComponent } from './eventos/detalhes-evento/detalhes-evento.component';
+import { ExcluirEventoComponent } from './eventos/excluir-evento/excluir-evento.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,10 @@ import { ErrorHandlerService } from './services/error.handler.service';
     AdicionarEventoComponent,
     AcessoNegadoComponent,
     NaoEncontradoComponent,
-    MeusEventosComponent
+    MeusEventosComponent,
+    EditarEventoComponent,
+    DetalhesEventoComponent,
+    ExcluirEventoComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +74,7 @@ import { ErrorHandlerService } from './services/error.handler.service';
     ReactiveFormsModule,
     HttpClientModule,
     CustomFormsModule,
+    MyDatePickerModule,
     ToastrModule.forRoot(),
     CollapseModule.forRoot(), // Para aplicar no módulo principal
     CarouselModule.forRoot(),

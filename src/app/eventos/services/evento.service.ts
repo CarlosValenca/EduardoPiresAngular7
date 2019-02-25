@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 
 // Coisas Nossas
 import { ServiceBase } from 'src/app/services/service.base';
-import { Evento, Categoria } from '../models/evento';
+import { Evento, Categoria, Endereco } from '../models/evento';
 
 @Injectable()
 export class EventoService extends ServiceBase {
@@ -58,6 +58,16 @@ export class EventoService extends ServiceBase {
                 );
     }
 
+    excluirEvento(id: string): Observable<Evento> {
+        return this.http
+            .delete<Evento>(this.UrlServiceV1 + "eventos/" + id, super.ObterHeaderJson())
+            .pipe(
+                map(super.extractedData),
+                catchError(super.serviceError)
+            );
+        }
+
+
     // Este serviço é para obter qualquer evento específico independente de um organizador
     obterEvento(id: string): Observable<Evento> {
         return this.http
@@ -66,4 +76,32 @@ export class EventoService extends ServiceBase {
                 catchError(super.serviceError)
                 );
     }
+
+    atualizarEvento(evento: Evento): Observable<Evento> {
+        let response = this.http
+            .put(this.UrlServiceV1 + "eventos", evento, super.ObterHeaderJson())
+            .pipe(
+                    map(super.extractedData),
+                    catchError(super.serviceError));
+        return response;
+    };
+  
+    adicionarEndereco(endereco: Endereco): Observable<Endereco> {
+        let response = this.http
+            .post(this.UrlServiceV1 + "endereco", endereco, super.ObterHeaderJson())
+            .pipe(
+                    map(super.extractedData),
+                    catchError(super.serviceError));
+        return response;
+    };
+  
+    atualizarEndereco(endereco: Endereco): Observable<Endereco> {
+        let response = this.http
+            .put(this.UrlServiceV1 + "endereco", endereco, super.ObterHeaderJson())
+            .pipe(
+                    map(super.extractedData),
+                    catchError(super.serviceError));
+        return response;
+    };
+  
 }

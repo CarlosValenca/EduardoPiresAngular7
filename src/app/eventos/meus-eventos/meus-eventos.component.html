@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <div class="pull-left">
       <a class="btn btn-primary" id="novoEvento" [routerLink]="['/novo-evento']">
-        <span title="Novo Evento" class="glyphicon ghyphicon-plus-sign"></span> Novo Evento
+        <span title="Novo Evento" class="glyphicon glyphicon-plus-sign"></span> Novo Evento
       </a>
     </div>
   </div>
@@ -39,12 +39,17 @@
               <span *ngSwitchCase="false" class="glyphicon glyphicon-unchecked"></span>
           </td>
 
-        <td>
-          <a title="Detalhes" class="btn btn-primary">
-            <span class="glyphicon glyphicon-search"></span> Saber Mais
-          </a>
-        </td>
-      </tr>
+          <td>
+            <a [routerLink]="['/detalhes-evento', evento.id]"  title="Detalhes" class="btn btn-primary">
+              <span class="glyphicon glyphicon-search"></span>
+            </a>
+            <a [routerLink]="['/editar-evento', evento.id]"  title="Editar" class="btn btn-warning">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a [routerLink]="['/excluir-evento', evento.id]"  title="Excluir" class="btn btn-danger">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
 
     </tbody>
   </table>
