@@ -137,7 +137,7 @@ export class AdicionarEventoComponent implements OnInit, AfterViewInit {
     const toast = this.toastr.success('Evento Registrado com Sucesso!', 'Oba :D');
     if(toast) {
       toast.onHidden.subscribe( () => {
-        this.router.navigate(['/meus-eventos']);
+        this.router.navigate(['/eventos/meus-eventos']);
       })
     }
   }

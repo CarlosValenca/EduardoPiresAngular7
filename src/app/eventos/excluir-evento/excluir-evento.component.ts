@@ -53,7 +53,7 @@ export class ExcluirEventoComponent implements OnInit {
     const toast = this.toastr.success('Evento excluido com Sucesso!', 'Good bye :D');
     if (toast) {
       toast.onHidden.subscribe(() => {
-        this.router.navigate(['/meus-eventos']);
+        this.router.navigate(['/eventos/meus-eventos']);
       });
     }
   }

@@ -11,7 +11,7 @@ export class EventoAuthService implements CanActivate {
     
     canActivate(routeAc: ActivatedRouteSnapshot): boolean {
         if(!this.organizadorService.isAuthenticated()) {
-            this.router.navigate(['/entrar']);
+            this.router.navigate(['/usuario/entrar']);
         }
 
         // Estou pegando e validando as claims do usuario logado aqui

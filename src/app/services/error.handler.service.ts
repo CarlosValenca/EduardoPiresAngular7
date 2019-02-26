@@ -28,7 +28,7 @@ export class ErrorHandlerService implements HttpInterceptor {
                 // Não Autorizado : O servidor não conhece este usuário (token expirado, usuário não logado, etc)
                 if(err.status === 401) {
                     this.organizadorService.removerUserToken();
-                    this.router.navigate(['/entrar']);
+                    this.router.navigate(['/usuario/entrar']);
                 }
                 // Acesso Negado : Usuários conectados sem as permissões necessárias
                 if(err.status === 403) {

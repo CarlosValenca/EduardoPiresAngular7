@@ -1,6 +1,6 @@
 <ul [ngSwitch]='usuarioLogado()' class="nav navbar-nav navbar-right">
-  <li *ngSwitchCase='false'><a [routerLink]="['/inscricao']">Registre-se</a></li>
-  <li *ngSwitchCase='false'><a [routerLink]="['/entrar']">Entrar</a></li>
+  <li *ngSwitchCase='false'><a [routerLink]="['/usuario/inscricao']">Registre-se</a></li>
+  <li *ngSwitchCase='false'><a [routerLink]="['/usuario/entrar']">Entrar</a></li>
   
   <!-- javascript:void(0) para dizer que o link nao fara acao alguma para evitar recarregar a pagina -->
   <li *ngSwitchCase='true'><a href="javascript:void(0)">Olá {{ nome }}</a></li>

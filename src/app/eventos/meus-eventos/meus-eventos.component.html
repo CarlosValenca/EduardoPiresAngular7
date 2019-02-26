@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-left">
-      <a class="btn btn-primary" id="novoEvento" [routerLink]="['/novo-evento']">
+      <a class="btn btn-primary" id="novoEvento" [routerLink]="['/eventos/novo']">
         <span title="Novo Evento" class="glyphicon glyphicon-plus-sign"></span> Novo Evento
       </a>
     </div>
@@ -40,13 +40,13 @@
           </td>
 
           <td>
-            <a [routerLink]="['/detalhes-evento', evento.id]"  title="Detalhes" class="btn btn-primary">
+            <a [routerLink]="['/eventos/detalhes', evento.id]"  title="Detalhes" class="btn btn-primary">
               <span class="glyphicon glyphicon-search"></span>
             </a>
-            <a [routerLink]="['/editar-evento', evento.id]"  title="Editar" class="btn btn-warning">
+            <a [routerLink]="['/eventos/editar', evento.id]"  title="Editar" class="btn btn-warning">
               <span class="glyphicon glyphicon-pencil"></span>
             </a>
-            <a [routerLink]="['/excluir-evento', evento.id]"  title="Excluir" class="btn btn-danger">
+            <a [routerLink]="['/eventos/excluir', evento.id]"  title="Excluir" class="btn btn-danger">
               <span class="glyphicon glyphicon-trash"></span>
             </a>
           </td>
